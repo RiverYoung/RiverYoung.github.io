@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Java核心技术 卷I第三章 Java的程序设计结构3.1 第一个Java程序12345public class HelloWorld &amp;#123;    public static void main(String[] args)&amp;#123;        System.out.println(&quot;Hello world&quot;);    &amp;#125;&amp;#125;   Java区分大小写;  Java使">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java核心技术 卷I 读书心得">
+<meta property="og:url" content="http://yoursite.com/2020/06/21/java/index.html">
+<meta property="og:site_name" content="River Young">
+<meta property="og:description" content="Java核心技术 卷I第三章 Java的程序设计结构3.1 第一个Java程序12345public class HelloWorld &amp;#123;    public static void main(String[] args)&amp;#123;        System.out.println(&quot;Hello world&quot;);    &amp;#125;&amp;#125;   Java区分大小写;  Java使">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-20T17:33:22.000Z">
+<meta property="article:modified_time" content="2020-08-09T07:01:33.424Z">
+<meta property="article:author" content="River Young">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/06/21/java/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Java核心技术 卷I 读书心得 | River Young</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">River Young</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">爱技术/爱拍照</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/21/java/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="River Young">
+      <meta itemprop="description" content="科技呵护未来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="River Young">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java核心技术 卷I 读书心得
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-21 01:33:22" itemprop="dateCreated datePublished" datetime="2020-06-21T01:33:22+08:00">2020-06-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-09 15:01:33" itemprop="dateModified" datetime="2020-08-09T15:01:33+08:00">2020-08-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Java核心技术-卷I"><a href="#Java核心技术-卷I" class="headerlink" title="Java核心技术 卷I"></a>Java核心技术 卷I</h1><h2 id="第三章-Java的程序设计结构"><a href="#第三章-Java的程序设计结构" class="headerlink" title="第三章 Java的程序设计结构"></a>第三章 Java的程序设计结构</h2><h3 id="3-1-第一个Java程序"><a href="#3-1-第一个Java程序" class="headerlink" title="3.1 第一个Java程序"></a>3.1 第一个Java程序</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Hello world"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>Java区分大小写;</p>
+</li>
+<li><p>Java使用骆驼命名法(CamelCase);</p>
+</li>
+<li><p>Java中的main方法必须是静态的 static;</p>
+</li>
+<li><p>Java中的注释可以使用 //, 也可以使用/*  */，但是后者不能嵌套；</p>
+ <a id="more"></a>
+
+</li>
+</ol>
+<h3 id="3-2-数据类型"><a href="#3-2-数据类型" class="headerlink" title="3.2 数据类型"></a>3.2 数据类型</h3><table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th>存储需求</th>
+<th>取值范围</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">boolean</td>
+<td></td>
+<td>ture/false</td>
+<td>整型值不能与布尔值转化</td>
+</tr>
+<tr>
+<td align="center">char</td>
+<td>2字节</td>
+<td>\u0000<del>\uFFFF（0</del>65535）</td>
+<td>字符类型，使用需要配合单引号 ‘A’</td>
+</tr>
+<tr>
+<td align="center">byte</td>
+<td>1字节</td>
+<td>-128~127</td>
+<td>整型</td>
+</tr>
+<tr>
+<td align="center">short</td>
+<td>2字节</td>
+<td>-32768~32767</td>
+<td>整型</td>
+</tr>
+<tr>
+<td align="center">int</td>
+<td>4字节</td>
+<td>-2147483648~2147483647</td>
+<td>整型</td>
+</tr>
+<tr>
+<td align="center">long</td>
+<td>8字节</td>
+<td>很长，很长</td>
+<td>整型</td>
+</tr>
+<tr>
+<td align="center">float</td>
+<td>4字节</td>
+<td>有效位为6~7位</td>
+<td>浮点类型</td>
+</tr>
+<tr>
+<td align="center">double</td>
+<td>8字节</td>
+<td>有效位为15位（双精度数值）</td>
+<td>浮点类型</td>
+</tr>
+</tbody></table>
+<ol>
+<li><p>float类型较少使用，其数值需要后缀F或f标明（3.14F），否则默认为double；</p>
+</li>
+<li><p>Java没有无符号形式的byte，short，int或long类型；</p>
+</li>
+<li><p>char和byte的区别？</p>
+<blockquote>
+<p><strong>byte</strong> 是整型数据 ，是有符号型的，占1 个字节；大小范围为-128~127 ；</p>
+<p><strong>char</strong> 是字符数据类型 ，是无符号型的，占2字节(Unicode码 ）；大小范围 是0~65535 ；</p>
+<p>char是一个16位二进制的Unicode字符，JAVA用char来表示单字符，例如 ‘A’ ；</p>
+<p>强烈建议不要在程序中使用char类型</p>
+</blockquote>
+</li>
+<li><p>数值之间的转换</p>
+<ol>
+<li><p>无信息丢失的转换，eg: byte → short → int → long/double; char → int; float → double</p>
+</li>
+<li><p>有精度损失的转换，eg: int → float; long → double；long → float;</p>
+</li>
+<li><p>强制类型转换</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> x = <span class="number">9.997</span>;</span><br><span class="line"><span class="keyword">int</span> nx = (<span class="keyword">int</span>)x;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="3-3-变量与常量"><a href="#3-3-变量与常量" class="headerlink" title="3.3 变量与常量"></a>3.3 变量与常量</h3><ol>
+<li><p>千万不能使用未初始化的变量的值，会报错；</p>
+</li>
+<li><p>变量的声明尽可能的靠近变量第一次使用的地方，这是一种良好的程序编写风格；</p>
+</li>
+<li><p>常量用关键字 <code>final</code> 声明，常量名使用全大写，一旦赋值无法修改；</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="keyword">double</span> CM_PER_INCH = <span class="number">2.54</span>;</span><br></pre></td></tr></table></figure>
+
+<p> 如果希望某个常量可以被一个类中的多个方法使用，可以用关键字 <code>static final</code> 设置为类常量(class constant)，类常量要定义在main方法的外部，如果声明为<code>public</code>，则可以再其它类的方法使用</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">double</span> CM_PER_INCH = <span class="number">2.54</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以将变量的取值只在一个有限的集合内的数值使用枚举类型 <code>enum</code>保存；</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> size&#123;SAMALL, MEDIUM, LARGE, EXTRAL_LARGE&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在Math类中，提供了很多方便计算的方法和常量</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Math.sqrt(x);</span><br><span class="line">Math.pow(x,a);</span><br><span class="line">Math.round(x); <span class="comment">//四舍五入</span></span><br><span class="line">Math.PI; <span class="comment">//3.141592653589793</span></span><br><span class="line">Math,E; <span class="comment">//2.718281828459045</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&amp;&amp; 和 ||是按照“短路”方法求值的，比如 A&amp;&amp;B 和 C||D中 A为假或者C为真时，B和D就不会执行；但是&amp;和|不会按照“短路”规则运算；</p>
+</li>
+</ol>
+<h3 id="3-4-字符串"><a href="#3-4-字符串" class="headerlink" title="3.4 字符串"></a>3.4 字符串</h3><ol>
+<li><p>Java没有预置字符串类型，<code>String</code>是标准Java类库中提供的预定义类；</p>
+</li>
+<li><p>每个用双引号括起来的字符串都是<code>String</code>类的一个实例；</p>
+</li>
+<li><p>不允许修改Java字符串中的单个字符，<code>String</code>类对象是不可变的；</p>
+</li>
+<li><p>Java中的<code>String</code>类提供了丰富的API接口</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String greeting = <span class="string">"Hello"</span>;</span><br><span class="line">String s = greeting.substring(<span class="number">0</span>, <span class="number">3</span>); <span class="comment">//提取子串</span></span><br><span class="line">s.equals(t); <span class="comment">//检测字符串是否相等，千万不能使用==去比较两个字符串是否相等</span></span><br><span class="line">s.charAt(n); <span class="comment">//返回位置n的代码单元</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果需要频繁的拼接字符串，那么使用<code>StringBuilder</code>类可以避免每次拼接字符串的时候都要重新构建一个<code>String</code>对象，既耗时又浪费空间</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">StringBuilder builder = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">builder.appen(ch);</span><br><span class="line">builder.appen(str);</span><br><span class="line">String completedString = builder.toString();</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="3-5-数组"><a href="#3-5-数组" class="headerlink" title="3.5 数组"></a>3.5 数组</h3><ol>
+<li><p>数组是一种数据结构，用来存储同一类型的数值的集合。</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] a; <span class="comment">//声明一个整型数组</span></span><br><span class="line"><span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">100</span>]; <span class="comment">//声明并初始化一个可以存储100个整数的数组</span></span><br><span class="line">	<span class="comment">//创建一个数字数组时，所有元素都默认初始化为0，boolean初始化为false，对象数组则初始化为null</span></span><br><span class="line"><span class="keyword">int</span>[] samllPrimes = &#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">11</span>,<span class="number">13</span>&#125;; <span class="comment">//声明并提供初始值</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>循环处理数组中的每个元素</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] a = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line"><span class="comment">//第一种方法 容易因为访问越界出现“array index out of bounds”的异常</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; a.length; j++)&#123; </span><br><span class="line">	System.out.println(a[j]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//第二种方法 更加简洁，不易出错，不必为下表的起始值和终止值而操心</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> item : a) &#123;</span><br><span class="line">	System.out.println(item);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数组常见API</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> String <span class="title">toString</span><span class="params">(xxx[] a)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(xxx[] a)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(xxx[] a, xxx v)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">fill</span><span class="params">(xxx[] a, xxx v)</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果程序运行中需要经常扩展数组的大小，则应该使用另一种数据结构 – <code>数组列表（array list）</code>；</p>
+</li>
+</ol>
+<h3 id="3-6-输入与输出"><a href="#3-6-输入与输出" class="headerlink" title="3.6 输入与输出"></a>3.6 输入与输出</h3><ol>
+<li><p>控制台输出最常见的就是 <code>System.out.println(&quot;Hello world&quot;);</code> 当然还有格式化输出（Java 5）</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">System.out.printf(<span class="string">"%,.2f"</span>, <span class="number">10000.0</span>/<span class="number">3.0</span>); <span class="comment">//，为分隔符 .2f 精度为小数点后2位</span></span><br><span class="line">System.out.printf(<span class="string">"%tc"</span>, <span class="keyword">new</span> Date()); <span class="comment">//Mon Feb 09 18:05:19 PST 2015</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>控制台输入，需要构造一个与“标准输入流” <code>System.in</code> 关联的<code>Scanner</code>对象</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Scanner in = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">System.out.println(<span class="string">"What is your name?"</span>);</span><br><span class="line">String name = in.nextLine(); <span class="comment">//读取一行输入</span></span><br><span class="line">System.out.println(<span class="string">"How old are you?"</span>);</span><br><span class="line"><span class="keyword">int</span> age = in.nextInt(); <span class="comment">//读取一个整数</span></span><br><span class="line">System.out.println(<span class="string">"Interest rate in %:"</span>);</span><br><span class="line"><span class="keyword">double</span> interestRate = in.nextDouble(); <span class="comment">//读取一个浮点数</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>文件的输入与输出</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Scanner in = <span class="keyword">new</span> Scanner(Path.of(<span class="string">"myfile.txt"</span>), StandardCharsets.UTF_8); <span class="comment">//读取文件</span></span><br><span class="line">PrintWriter out = <span class="keyword">new</span> PrintWrite(<span class="string">"myfile.txt"</span>, StandardCharsets.UTF_8); <span class="comment">//写入文件，不存在则创建</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+</li>
+</ol>
+<h2 id="第五章-继承"><a href="#第五章-继承" class="headerlink" title="第五章 继承"></a>第五章 继承</h2><h3 id="5-1-概念"><a href="#5-1-概念" class="headerlink" title="5.1 概念"></a>5.1 概念</h3><p>​    继承（inheritance）：复用已有的类的属性和方法，并新增自己的属性和方法的技术。已有的类成为父类（parent class），新类称为子类（child class）。用关键字 <code>extends</code> 表示继承。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Manager</span> <span class="keyword">extends</span> <span class="title">Employee</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>java用关键字extends替代了C++中的冒号 ( : )，在java中，所有的继承都是公共继承，而没有C++中的私有继承和保护继承</p>
+</blockquote>
+<h3 id="5-2-关键字-final"><a href="#5-2-关键字-final" class="headerlink" title="5.2 关键字 final"></a>5.2 关键字 final</h3><ol>
+<li><p>final常量，常量名使用全大写，一旦赋值无法修改；</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="keyword">double</span> CM_PER_INCH = <span class="number">2.54</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>final 方法，类中某个方法声明为final方法后，其子类不能覆盖该方法;</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Employee</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> String getName&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>final 类，不允许扩展的类。将类声明为final类之后，所有的方法自动称为final 方法，但是不包括属性。</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Executive</span> <span class="keyword">extends</span> <span class="title">Employee</span></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="强制类型转换"><a href="#强制类型转换" class="headerlink" title="强制类型转换"></a>强制类型转换</h3><p> 进行强制类型转换的原因：</p>
+<p> ​    要暂时忽视对象的实际类型之后，使用对象的全部功能。比如，为了让对象引用能是使用子类的特殊处理，需要将对象引用从引用父类通过强制类型转化为子类。</p>
+<p> 需要注意点：</p>
+<p> ​    强制类型转换只适用于继承层次内;</p>
+<p> ​    将子类的引用赋给父类变量，编译器是允许的；但将一个父类的引用赋给一个子类的变量时，就承诺过多了，必须进行强制类型转换;</p>
+<p> ​    在进行强制类型转换之前，可以通过使用<code>instanceof</code>操作符检查是否能成功转换;</p>
+<p> ​    </p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(staff[<span class="number">1</span>] <span class="keyword">instanceof</span> Manager)&#123;</span><br><span class="line">    boss = (Manager)staff[<span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+</li>
+</ol>
+<h2 id="第六章-接口、Lambda表达式与内部类"><a href="#第六章-接口、Lambda表达式与内部类" class="headerlink" title="第六章 接口、Lambda表达式与内部类"></a>第六章 接口、Lambda表达式与内部类</h2><p>接口 <code>interface</code>，用来描述类应该做什么，而不指定它具体怎么做；</p>
+<p>一个类可以实现 <code>implements</code> 一个或多个接口；</p>
+<p>接口中的所有方法都自动是public方法，因此，在接口中声明方法时，不需提供关键字public；</p>
+<p>接口中还可以定义常量，并且会自动默认为public static final；</p>
+<p>但是没有实例字段和实例方法，可以将接口看成是没有实例字段的抽象类；</p>
+<p>让类实现一个接口时，除了将类声明为实现给定的接口外，还需对接口中的所有方法提供定义；    </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Comparable</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Object other)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Employee</span> <span class="keyword">implements</span> <span class="title">Comparable</span>&lt;<span class="title">Employee</span>&gt; </span>&#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接口与抽象类</p>
+<blockquote>
+<p>已经有抽象类了，为什么还需要接口？</p>
+<p>因为使用抽象类表示通用属性存在一个严重的问题，就是每个类只能扩展一个类。假设某个类扩展了该抽象类，就无法扩展第二个类了。但是，每个类可以实现多个接口。C++中允许一个类多重继承，而Java中选择不支持多重继承，主要原因是多重继承会让语言变得非常复杂或者效率低下。实际上，接口可以提供多重继承的好处，同时避免多重继承的复杂性和低效性。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/08/External-Interface/" rel="prev" title="External Interface">
+      <i class="fa fa-chevron-left"></i> External Interface
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/09/Data-Structures-and-Algorithm/" rel="next" title="Data Structures and Algorithm">
+      Data Structures and Algorithm <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java核心技术-卷I"><span class="nav-number">1.</span> <span class="nav-text">Java核心技术 卷I</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第三章-Java的程序设计结构"><span class="nav-number">1.1.</span> <span class="nav-text">第三章 Java的程序设计结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-第一个Java程序"><span class="nav-number">1.1.1.</span> <span class="nav-text">3.1 第一个Java程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-数据类型"><span class="nav-number">1.1.2.</span> <span class="nav-text">3.2 数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-变量与常量"><span class="nav-number">1.1.3.</span> <span class="nav-text">3.3 变量与常量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-字符串"><span class="nav-number">1.1.4.</span> <span class="nav-text">3.4 字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-数组"><span class="nav-number">1.1.5.</span> <span class="nav-text">3.5 数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-输入与输出"><span class="nav-number">1.1.6.</span> <span class="nav-text">3.6 输入与输出</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第五章-继承"><span class="nav-number">1.2.</span> <span class="nav-text">第五章 继承</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-概念"><span class="nav-number">1.2.1.</span> <span class="nav-text">5.1 概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-关键字-final"><span class="nav-number">1.2.2.</span> <span class="nav-text">5.2 关键字 final</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#强制类型转换"><span class="nav-number">1.2.3.</span> <span class="nav-text">强制类型转换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第六章-接口、Lambda表达式与内部类"><span class="nav-number">1.3.</span> <span class="nav-text">第六章 接口、Lambda表达式与内部类</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">River Young</p>
+  <div class="site-description" itemprop="description">科技呵护未来</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">River Young</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+    </div>
+</body>
+</html>
