@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Array剑指 Offer 04. 二维数组中的查找 剑指 Offer 04. 二维数组中的查找在一个 n * m 的二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。 示例: 现有矩阵 matrix 如下： [[1,   4,  7, 11, 15],[2,   5,  8, 12, 1">
+  <meta name="description" content="Array04. 二维数组中的查找 剑指 Offer 04. 二维数组中的查找在一个 n * m 的二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。 示例: 现有矩阵 matrix 如下： [[1,   4,  7, 11, 15],[2,   5,  8, 12, 19],[3,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Data Structures and Algorithm">
 <meta property="og:url" content="http://yoursite.com/2020/08/09/Data-Structures-and-Algorithm/index.html">
 <meta property="og:site_name" content="River Young">
-<meta property="og:description" content="Array剑指 Offer 04. 二维数组中的查找 剑指 Offer 04. 二维数组中的查找在一个 n * m 的二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。 示例: 现有矩阵 matrix 如下： [[1,   4,  7, 11, 15],[2,   5,  8, 12, 1">
+<meta property="og:description" content="Array04. 二维数组中的查找 剑指 Offer 04. 二维数组中的查找在一个 n * m 的二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。 示例: 现有矩阵 matrix 如下： [[1,   4,  7, 11, 15],[2,   5,  8, 12, 19],[3,">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-08-09T06:04:07.000Z">
-<meta property="article:modified_time" content="2020-08-09T15:07:13.144Z">
+<meta property="article:modified_time" content="2020-08-09T15:09:40.100Z">
 <meta property="article:author" content="River Young">
 <meta property="article:tag" content="数据结构与算法">
 <meta name="twitter:card" content="summary">
@@ -191,7 +191,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-08-09 14:04:07 / 修改时间：23:07:13" itemprop="dateCreated datePublished" datetime="2020-08-09T14:04:07+08:00">2020-08-09</time>
+              <time title="创建时间：2020-08-09 14:04:07 / 修改时间：23:09:40" itemprop="dateCreated datePublished" datetime="2020-08-09T14:04:07+08:00">2020-08-09</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -214,8 +214,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h2><h3 id="剑指-Offer-04-二维数组中的查找"><a href="#剑指-Offer-04-二维数组中的查找" class="headerlink" title="剑指 Offer 04. 二维数组中的查找"></a>剑指 Offer 04. 二维数组中的查找</h3><blockquote>
-<h3 id="剑指-Offer-04-二维数组中的查找-1"><a href="#剑指-Offer-04-二维数组中的查找-1" class="headerlink" title="剑指 Offer 04. 二维数组中的查找"></a>剑指 Offer 04. 二维数组中的查找</h3><p>在一个 n * m 的二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。</p>
+        <h2 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h2><h3 id="04-二维数组中的查找"><a href="#04-二维数组中的查找" class="headerlink" title="04. 二维数组中的查找"></a>04. 二维数组中的查找</h3><blockquote>
+<h3 id="剑指-Offer-04-二维数组中的查找"><a href="#剑指-Offer-04-二维数组中的查找" class="headerlink" title="剑指 Offer 04. 二维数组中的查找"></a>剑指 Offer 04. 二维数组中的查找</h3><p>在一个 n * m 的二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。</p>
 <p>示例:</p>
 <p>现有矩阵 matrix 如下：</p>
 <p>[<br>[1,   4,  7, 11, 15],<br>[2,   5,  8, 12, 19],<br>[3,   6,  9, 16, 22],<br>[10, 13, 14, 17, 24],<br>[18, 21, 23, 26, 30]<br>]<br>给定 target = 5，返回 true。</p>
@@ -235,7 +235,7 @@
 
 
 
-<h3 id="剑指-Offer-05-替换空格"><a href="#剑指-Offer-05-替换空格" class="headerlink" title="剑指 Offer 05.替换空格"></a>剑指 Offer 05.替换空格</h3><blockquote>
+<h3 id="05-替换空格"><a href="#05-替换空格" class="headerlink" title="05.替换空格"></a>05.替换空格</h3><blockquote>
 <p>剑指 Offer 05. 替换空格<br>请实现一个函数，把字符串 s 中的每个空格替换成”%20”。</p>
 <p>示例 1：</p>
 <p>输入：s = “We are happy.”<br>输出：”We%20are%20happy.”</p>
@@ -247,7 +247,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">*  剑指 Offer 05. 替换空格</span></span><br><span class="line"><span class="comment">*  时间复杂度：O(n)</span></span><br><span class="line"><span class="comment">*  空间复杂度：O(n)</span></span><br><span class="line"><span class="comment">* */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">replaceSpace</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> len = s.length();</span><br><span class="line">    StringBuilder sb = <span class="keyword">new</span> StringBuilder(); <span class="comment">//StringBuilder和String的区别</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (s.charAt(i) != <span class="string">' '</span>)&#123;</span><br><span class="line">            sb.append(s.charAt(i));</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (s.charAt(i) == <span class="string">' '</span>)&#123;</span><br><span class="line">            sb.append(<span class="string">"%2"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    String str = sb.toString();</span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>​    <a href="https://www.cnblogs.com/mrxy/p/8057657.html" target="_blank" rel="noopener">StringBuilder和String的区别</a></p>
-<h3 id="剑指Offer17-打印从-1-到最大的-n-位数"><a href="#剑指Offer17-打印从-1-到最大的-n-位数" class="headerlink" title="剑指Offer17. 打印从 1 到最大的 n 位数"></a>剑指Offer17. 打印从 1 到最大的 n 位数</h3><p>解题思路：<br>    题目要求打印 “从 1 至最大的 n位数的列表” ，因此需考虑以下两个问题：</p>
+<h3 id="17-打印从-1-到最大的-n-位数"><a href="#17-打印从-1-到最大的-n-位数" class="headerlink" title="17. 打印从 1 到最大的 n 位数"></a>17. 打印从 1 到最大的 n 位数</h3><p>解题思路：<br>    题目要求打印 “从 1 至最大的 n位数的列表” ，因此需考虑以下两个问题：</p>
 <p>​    最大的 n 位数（记为 end ）和位数 n 的关系： 例如最大的 1位数是 9，最大的 2 位数是 99 ，最大的 3 位数是 999 。则可推出公式：<br>​    <code>end = 10^n - 1</code></p>
 <p>​    <code>大数越界问题</code>： 当 n 较大时，end 会超出 int32整型的取值范围，超出取值范围的数字无法正常存储。但由于本题要求返回 int 类型数组，相当于默认所有数字都在 int32 整型取值范围内，因此不考虑大数越界问题。<br>因此，只需定义区间 [1, 10^n - 1][1,10 n −1] 和步长 11 ，通过 forfor 循环生成结果列表 res 并返回即可。</p>
 <p>复杂度分析：<br>时间复杂度 O(10^n ) ： 生成长度为 10^n 的列表需使用 O(10^n)时间。<br>空间复杂度 O(1) ： 建立列表需使用 O(1)大小的额外空间（ 列表作为返回结果，不计入额外空间 ）。</p>
@@ -336,7 +336,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Array"><span class="nav-number">1.</span> <span class="nav-text">Array</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#剑指-Offer-04-二维数组中的查找"><span class="nav-number">1.1.</span> <span class="nav-text">剑指 Offer 04. 二维数组中的查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#剑指-Offer-04-二维数组中的查找-1"><span class="nav-number">1.2.</span> <span class="nav-text">剑指 Offer 04. 二维数组中的查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#剑指-Offer-05-替换空格"><span class="nav-number">1.3.</span> <span class="nav-text">剑指 Offer 05.替换空格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#剑指Offer17-打印从-1-到最大的-n-位数"><span class="nav-number">1.4.</span> <span class="nav-text">剑指Offer17. 打印从 1 到最大的 n 位数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String"><span class="nav-number">2.</span> <span class="nav-text">String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#List"><span class="nav-number">3.</span> <span class="nav-text">List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Queue-Stack"><span class="nav-number">4.</span> <span class="nav-text">Queue&#x2F;Stack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap"><span class="nav-number">5.</span> <span class="nav-text">HashMap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tree"><span class="nav-number">6.</span> <span class="nav-text">Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文章"><span class="nav-number">7.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Array"><span class="nav-number">1.</span> <span class="nav-text">Array</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#04-二维数组中的查找"><span class="nav-number">1.1.</span> <span class="nav-text">04. 二维数组中的查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#剑指-Offer-04-二维数组中的查找"><span class="nav-number">1.2.</span> <span class="nav-text">剑指 Offer 04. 二维数组中的查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#05-替换空格"><span class="nav-number">1.3.</span> <span class="nav-text">05.替换空格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-打印从-1-到最大的-n-位数"><span class="nav-number">1.4.</span> <span class="nav-text">17. 打印从 1 到最大的 n 位数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String"><span class="nav-number">2.</span> <span class="nav-text">String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#List"><span class="nav-number">3.</span> <span class="nav-text">List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Queue-Stack"><span class="nav-number">4.</span> <span class="nav-text">Queue&#x2F;Stack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap"><span class="nav-number">5.</span> <span class="nav-text">HashMap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tree"><span class="nav-number">6.</span> <span class="nav-text">Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文章"><span class="nav-number">7.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
