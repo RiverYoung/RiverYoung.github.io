@@ -19,7 +19,7 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"riveryoung.cn","root":"/","scheme":"Mist","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+    var CONFIG = {"hostname":"riveryoung.cn","root":"/","scheme":"Mist","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
   </script>
 
   <meta name="description" content="Array&#x2F;String数组和链表的区别数组是连续的；链表是不连续的； 数组是存放在栈区的，由系统自动分配；链表存方在堆区，由程序员动态分配内存； 数组的访问元素速度快，时间复杂度是O(1)，链表访问元素速度慢，时间复杂度是O(n)； 数组的插入或删除时间复杂度是O(n)，链表的时间复杂度是O(1)；">
@@ -52,7 +52,7 @@
 <link rel="canonical" href="http://riveryoung.cn/2020/08/09/Data-Structures-and-Algorithm/">
 
 
-<script class="page-configurations">
+<script data-pjax class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -227,6 +227,20 @@
       </div>
   </nav>
 </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RiverYoung" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RiverYoung" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/yourname" title="zhihu → https:&#x2F;&#x2F;weibo.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-zhihu fa-fw"></i>zhihu</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yangjianghe@hikvision.com" title="E-Mail → mailto:yangjianghe@hikvision.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/%E6%B1%9F%E6%B2%B3-%E6%9D%A8-1b862916b/" title="in → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;%E6%B1%9F%E6%B2%B3-%E6%9D%A8-1b862916b&#x2F;" rel="noopener" target="_blank"><i class="fa fa-invision fa-fw"></i>in</a>
+      </span>
+  </div>
 
 
 
@@ -305,6 +319,13 @@
     </span>
 
   
+    <span id="/2020/08/09/Data-Structures-and-Algorithm/" class="post-meta-item leancloud_visitors" data-flag-title="Data Structures and Algorithm" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
 </div>
 
         </div>
@@ -505,10 +526,10 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*  剑指 Offer 30. 包含 min 函数的栈</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* Your MinStack object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment">* MinStack obj = new MinStack();</span></span><br><span class="line"><span class="comment">* obj.push(x);</span></span><br><span class="line"><span class="comment">* obj.pop();</span></span><br><span class="line"><span class="comment">* int param_3 = obj.top();</span></span><br><span class="line"><span class="comment">* int param_4 = obj.min();</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MinStack</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Stack&lt;Integer&gt; numStack;</span><br><span class="line">    <span class="keyword">private</span> Stack&lt;Integer&gt; minStack;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** initialize your data structure here. */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MinStack</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        numStack = <span class="keyword">new</span> Stack&lt;Integer&gt;();</span><br><span class="line">        minStack = <span class="keyword">new</span> Stack&lt;Integer&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        numStack.push(x);</span><br><span class="line">        <span class="keyword">if</span> (minStack.isEmpty())&#123;</span><br><span class="line">            minStack.push(x);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (x &lt;= minStack.peek())&#123;</span><br><span class="line">                minStack.push(x);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">/* if (numStack.pop().equals(minStack.peek()))&#123;</span></span><br><span class="line"><span class="comment">                minStack.pop();</span></span><br><span class="line"><span class="comment">            &#125;*/</span></span><br><span class="line">        <span class="keyword">if</span> (!numStack.isEmpty())&#123;</span><br><span class="line">            <span class="keyword">if</span> (numStack.peek().equals(minStack.peek()))&#123; </span><br><span class="line">      <span class="comment">//使用if (numStack.peek() == minStack.peek())&#123; 会出错</span></span><br><span class="line">     <span class="comment">//.equals()方法和==相等判断有什么区别？ https://www.imooc.com/wenda/detail/505519</span></span><br><span class="line">                minStack.pop();</span><br><span class="line">            &#125;</span><br><span class="line">            numStack.pop();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">top</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> numStack.peek();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">min</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> minStack.peek();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h4 id="equals-方法和-相等判断有什么区别？"><a href="#equals-方法和-相等判断有什么区别？" class="headerlink" title=".equals()方法和==相等判断有什么区别？"></a><a target="_blank" rel="noopener" href="https://www.imooc.com/wenda/detail/505519">.equals()方法和==相等判断有什么区别？</a></h4><p><code>==</code>是比较两个字符串引用的地址是否相同，即是否指向同一个对象，而<code>equals</code>方法则比较字符串的内容是否相同。<br>例如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String a &#x3D; &quot;abc&quot;;</span><br><span class="line">String b &#x3D; &quot;abc&quot;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">String a</span> = <span class="string">&quot;abc&quot;</span>;</span><br><span class="line"><span class="attribute">String b</span> = <span class="string">&quot;abc&quot;</span>;</span><br></pre></td></tr></table></figure>
 
 <p><code>a == b</code>返回true，<code>a.equals(b)</code>同样返回true。<br>因为程序在运行时有一个字符串池，创建字符串时会先查找池中是否有相应的字符串，如果已经存在的话只需把引用指向它即可，如果没有则新建一个。上例中创建a时，会在字符串池中首先创建一个”<code>abc</code>“，然后a指向它；创建b时，由于”<code>abc</code>“已经存在，b直接指向它即可。<br>若改为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String a &#x3D; &quot;abc&quot;;</span><br><span class="line">String b &#x3D; new String(&quot;abc&quot;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">String</span> a = <span class="string">&quot;abc&quot;</span>;</span><br><span class="line"><span class="keyword">String</span> b = <span class="keyword">new</span> <span class="keyword">String</span>(<span class="string">&quot;abc&quot;</span>);</span><br></pre></td></tr></table></figure>
 
 <p>则<code>a == b</code>返回false，<code>a.equals(b)</code>返回true。因为创建b时不管”<code>abc</code>“是否存在都会new一个新的”<code>abc</code>“，从而a和b指向的字符创对象是不同的，因此返回false。</p>
 <h2 id="HashSet-HashMap"><a href="#HashSet-HashMap" class="headerlink" title="HashSet/HashMap"></a>HashSet/HashMap</h2><h3 id="剑指-Offer-03-数组中重复的数字"><a href="#剑指-Offer-03-数组中重复的数字" class="headerlink" title="剑指 Offer 03. 数组中重复的数字"></a>剑指 Offer 03. 数组中重复的数字</h3><blockquote>
@@ -767,15 +788,48 @@
   </span>
   <span class="author" itemprop="copyrightHolder">River Young</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
-  </div>
 
     </div>
   </footer>
 
   
   <script src="//unpkg.com/animejs@3.2.0/lib/anime.min.js"></script>
+  <script src="/true"></script>
 <script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
 
   
 
@@ -802,9 +856,11 @@
 
 
 
+    <div class="pjax">
   
 
   
 
+    </div>
 </body>
 </html>
