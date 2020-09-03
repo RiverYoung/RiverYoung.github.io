@@ -39,7 +39,6 @@
 <meta property="og:image" content="http://riveryoung.cn/2020/08/30/DARPA-2005-Stanley/Flowchart-of-Stanley-software-system.png">
 <meta property="og:image" content="http://riveryoung.cn/2020/08/30/DARPA-2005-Stanley/Standard-methodology-of-Stanley">
 <meta property="og:image" content="http://riveryoung.cn/2020/08/30/DARPA-2005-Stanley/state-estimation.png">
-<meta property="og:image" content="http://riveryoung.cn/2020/08/30/DARPA-2005-Stanley/3d-denoted.png">
 <meta property="og:image" content="http://riveryoung.cn/2020/08/30/DARPA-2005-Stanley/scanning-process.png">
 <meta property="og:image" content="http://riveryoung.cn/2020/08/30/DARPA-2005-Stanley/grip-map.png">
 <meta property="og:image" content="http://riveryoung.cn/2020/08/30/DARPA-2005-Stanley/small-error.png">
@@ -55,7 +54,11 @@
 <meta property="og:image" content="http://riveryoung.cn/2020/08/30/DARPA-2005-Stanley/search-regions-for-the-road-detection-module.png">
 <meta property="og:image" content="http://riveryoung.cn/2020/08/30/DARPA-2005-Stanley/relationship-between-velocity-and-imparted-acceleration.png">
 <meta property="og:image" content="http://riveryoung.cn/2020/08/30/DARPA-2005-Stanley/smoothing-RDDF.png">
+<meta property="og:image" content="http://riveryoung.cn/2020/08/30/DARPA-2005-Stanley/Path-planning-in-a-2D-search-space.png">
 <meta property="og:image" content="http://riveryoung.cn/2020/08/30/DARPA-2005-Stanley/processes-the-drivability-map.png">
+<meta property="og:image" content="http://riveryoung.cn/2020/08/30/DARPA-2005-Stanley/stanley-velocity-pro%EF%AC%81le-of-a-human-driver.png">
+<meta property="og:image" content="http://riveryoung.cn/2020/08/30/DARPA-2005-Stanley/stanley-steering-controller.png">
+<meta property="og:image" content="http://riveryoung.cn/2020/08/30/DARPA-2005-Stanley/Stanley-phase-portrait.png">
 <meta property="og:image" content="http://riveryoung.cn/2020/08/30/DARPA-2005-Stanley/Vehicle-testing.png">
 <meta property="og:image" content="http://riveryoung.cn/2020/08/30/DARPA-2005-Stanley/Stanley-path.png">
 <meta property="og:image" content="http://riveryoung.cn/2020/08/30/DARPA-2005-Stanley/Passing-CMU-H1ghlander-robot.png">
@@ -67,7 +70,7 @@
 <meta property="og:image" content="http://riveryoung.cn/2020/08/30/DARPA-2005-Stanley/Beer-Bottle-Pass2.png">
 <meta property="og:image" content="http://riveryoung.cn/2020/08/30/DARPA-2005-Stanley/histogram-of-lateral-offsets.png">
 <meta property="article:published_time" content="2020-08-30T08:35:31.000Z">
-<meta property="article:modified_time" content="2020-09-02T17:00:21.342Z">
+<meta property="article:modified_time" content="2020-09-03T17:03:23.218Z">
 <meta property="article:author" content="River Young">
 <meta property="article:tag" content="自动驾驶">
 <meta name="twitter:card" content="summary">
@@ -331,7 +334,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-03 01:00:21" itemprop="dateModified" datetime="2020-09-03T01:00:21+08:00">2020-09-03</time>
+        <time title="修改时间：2020-09-04 01:03:23" itemprop="dateModified" datetime="2020-09-04T01:03:23+08:00">2020-09-04</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -411,8 +414,8 @@
 <p>​    当GPS可用时，UKF只使用了“Weak”模式。这个模型对应于一个移动的质量，它可以向任何方向移动。因此，在正常工作模式下，UKF对相对于车辆方向的速度矢量方向不施加约束。这样的模型显然是不准确的，但是在光滑的沙漠地形中，车辆与地面的相互作用通常很难建模。移动质量模型允许可能发生在越野驾驶中的任何打滑或侧滑。</p>
 <p>​    然而，该模型在GPS中断时表现不佳，因为车辆的位置强烈依赖IMU加速计的精度。因此，在GPS中断期间使用了更严格的UKF运动模型。该模型约束车辆只沿其指向的方向运动。集成IMU的陀螺仪的方向和车轮的速度计算位置，能够在GPS中断的2分钟内保持准确的姿态。累积误差通常以厘米为单位。Stanley的运行状况监视器将降低GPS故障期间的最大车速至每小时10英里，以最大限度地提高受限制车辆模型的准确性。在GPS中断使用Weak车辆模型的位置评估结果如下图a，而图b使用的强车辆模型的评估结果。这个实验说明了该滤波器在GPS中断时的性能。显然，GPS故障期间精确的车辆建模是至关重要的。在一条铺好的道路上进行的实验中，我们发现即使在没有GPS的情况下循环行驶1.3公里，车辆累积误差也只有1.7米。</p>
 <p><img src="/2020/08/30/DARPA-2005-Stanley/state-estimation.png" alt="1598804183605"></p>
-<h2 id="激光地形绘制"><a href="#激光地形绘制" class="headerlink" title="激光地形绘制"></a>激光地形绘制</h2><h3 id="地形分类"><a href="#地形分类" class="headerlink" title="地形分类"></a>地形分类</h3><p>​    为了安全地避开障碍物，Stanley必须能够在足够的范围内准确地探测到不可行驶的地形，以便停止或采取适当的规避动作。车辆移动得越快，就必须检测到越远的障碍物。激光被用作Stanley短距离和中距离避障的基础。Stanley车顶装有5台单扫描激光测距仪，倾斜向下扫描前方道路。扫描过程如下图a。每次激光扫描产生一个大小为181的向量，间隔0.5度。将这些扫描投影到全局坐标系中，根据车辆的估计姿态，得到每个激光的三维点云。图b则显示了多个不同的传感器所获取的三维点云的例子。这种3D点的坐标表示为<img src="/2020/08/30/DARPA-2005-Stanley/3d-denoted.png" alt="1598805144874"></p>
-<p><img src="/2020/08/30/DARPA-2005-Stanley/scanning-process.png" alt="1598804966776"></p>
+<h2 id="激光地形绘制"><a href="#激光地形绘制" class="headerlink" title="激光地形绘制"></a>激光地形绘制</h2><h3 id="地形分类"><a href="#地形分类" class="headerlink" title="地形分类"></a>地形分类</h3><p>​    为了安全地避开障碍物，Stanley必须能够在足够的范围内准确地探测到不可行驶的地形，以便停止或采取适当的规避动作。车辆移动得越快，就必须检测到越远的障碍物。激光被用作Stanley短距离和中距离避障的基础。Stanley车顶装有5台单扫描激光测距仪，倾斜向下扫描前方道路。扫描过程如下图a。每次激光扫描产生一个大小为181的向量，间隔0.5度。将这些扫描投影到全局坐标系中，根据车辆的估计姿态，得到每个激光的三维点云。图b则显示了多个不同的传感器所获取的三维点云的例子。这种3D点的坐标表示为：</p>
+<p>$$<br>(X_k^i\ Y_k^i\ Z_k^i)<br>$$<br><img src="/2020/08/30/DARPA-2005-Stanley/scanning-process.png" alt="1598804966776"></p>
 <p>​    激光点云上的障碍物检测可以被描述为一个分类问题，在一个表面网格中为每个二维位置分配三个可能的值:已占用、自由和未知。如果我们可以找到两个邻近点的垂直距离超过关键的垂直距离，可以认为该位置是一个障碍。如果没有发现这样的点，则可以认为是可以正常通行的障碍，但至少有一个读数分为相应的网格单元。如果没有读入单元格，则认为该单元格的可驾驶性是未知的。对附近点的搜索被方便地组织在一个2D网格中，与提供给车辆导航引擎的最终驾驶能力地图使用的网格相同。下图就是网格图的例子，如图所示，地图将地形分为三类:可驾驶、已占用或未知。</p>
 <p><img src="/2020/08/30/DARPA-2005-Stanley/grip-map.png" alt="1598805767993"></p>
 <p>​    遗憾的是，将这种分类方案直接应用于激光数据会产生不适应自动导航的结果。下图就是个例子，车辆roll/pitch评估中的小错误会导致大量的地形分类错误，从而导致车辆开出道路。由于激光瞄准车辆前方30米以内的道路，微小的位姿误差在激光点的投影位置上被放大成较大的误差。在标签地形的参考数据集中，我们发现，在高度阈值为15厘米时，有12.6%的可行驶区域被划分为障碍。即使roll/pitch误差小于0.5°，这种情况也会发生。这种程度的姿态错误可以通过用几十万美元的姿态评估系统解决，但是这样的选择对于这个项目来说太昂贵了。</p>
@@ -497,17 +500,30 @@
 <p>​    路径规划器被实现为一个搜索算法，在一个固定的车辆模型下，最小化连续成本函数的线性组合。车辆模型包括几个运动学和动力学约束包括最大横向加速度（防止甩尾）和最大转向角(联合限制)，最大转向速率（转向电机的最大速度）和最大减速。成本函数会惩罚越过障碍物、离开RDDF赛道、以及当前轨迹到路面感知中心的横向偏移。软约束诱导一个可容许轨迹的排序。Stanley选择了这样的最佳轨迹。在计算总路径代价时，未知区域被视为可行驶的路面，这样车辆在道路上遇到未映射的点或镜面表面(如水坑)时就不会转弯。</p>
 <p>​    在每一个时间步长，计划者重新考虑从一个2D空间绘制的轨迹。第一个维度描述添加到当前轨迹的横向偏移量。这个参数允许Stanley左右移动，同时仍然基本保持与基本轨迹平行。第二个维度描述了Stanley将尝试改变到这个横向偏移的速率。前视距离与速度有关，范围为15 - 25米。所有候选路径都在车辆模型中运行，以确保符合车辆的运动学和动力学约束。在基本轨迹的顶部重复分层这些简单的动作可以产生相当复杂的轨迹。</p>
 <p>​    路径搜索中的第二个参数允许规划者控制避障的迫切性。道路上的离散障碍物，如岩石或篱笆桩，通常需要尽可能快地改变侧向偏移。在不违反侧向加速度约束的情况下，能够快速改变侧向偏移量的路径称为转向。道路边界位置的缓慢变化需要缓慢平稳地调整侧向偏移量。在给定的规划平面上，具有最慢的侧向偏移变化的轨迹称为微移。快速变化用于避开迎面的障碍物，缓慢变化用于平稳跟踪道路中心。下图显示了转向和微移。在直线道路上，由此产生的轨迹类似于 Ko &amp; Simmons’s （1998）的道路卷曲率方法。</p>
-<p>![1599064654230](DARPA-2005-Stanley/path-planning-in-a-2D-search-space.png “Figure 21. Path planning in a 2D search space:(a) Paths that change lateral offsets with the minimum possible lateral acceleration (for a ﬁxed plan horizon); and (b) the same for the maximum lateral acceleration. The former are called “nudges,” and the latter are called “swerves.””)</p>
+<p><img src="/2020/08/30/DARPA-2005-Stanley/Path-planning-in-a-2D-search-space.png" alt="1599064654230" title="Figure 21. Path planning in a 2D search space:(a)Paths that change lateral offsets with the minimum possible lateral acceleration (for a fixed plan horizon); and (b) the same for the maximum lateral acceleration. The former are called nudges, and the latter are called swerves."></p>
 <p>​    路径规划器以10Hz的频率执行。路径规划器对于车辆实际和设计的路径的偏差是不知道的，因为这些是由低水平的转向控制器处理的。因此得到的轨迹总是连续的。在不违反最大侧向加速度约束的情况下，可以急转和刹车。</p>
 <p>​    下图显示了路径规划器的一个示例。这里展示的是来自啤酒瓶通道的情况，这是2005年超级挑战赛中最困难的通道。这幅图只说明了两个搜索参数中的一个：横向偏移量。它说明了通过逐渐改变相对于基本轨迹的横向偏移而产生轨迹的过程。通过使用基本轨迹作为参考，路径规划可以在低维空间中进行，我们发现这对于实时性是必要的。</p>
 <p><img src="/2020/08/30/DARPA-2005-Stanley/processes-the-drivability-map.png" alt="1599065687050" title="Figure 22. Snapshots of the path planner as it processes the drivability map. Both snapshots show a map, the vehicle,and the various nudges considered by the planner. The ﬁrst snapshot stems from a straight road (Mile 39.2 of the 2005 Race Course). Stanley is traveling 31.4 mph; and hence, can only slowly change lateral offsets due to the lateral acceleration constraint. The second example is taken from the most difﬁcult part of the 2005 DARPA Grand Challenge, a mountainous area called Beer Bottle Pass. Both images show only nudges for clarity."></p>
 <h2 id="实时控制"><a href="#实时控制" class="headerlink" title="实时控制"></a>实时控制</h2><p>​    一旦路径规划器确定了车辆的预期路径，就必须计算实现该路径所需的适当的油门、刹车和转向命令。这个控制问题将被描述为两部分:速度控制器和转向控制器。</p>
-<h3 id="速度控制"><a href="#速度控制" class="headerlink" title="速度控制"></a>速度控制</h3><h3 id="转向控制"><a href="#转向控制" class="headerlink" title="转向控制"></a>转向控制</h3><h2 id="开发进程和比赛结果"><a href="#开发进程和比赛结果" class="headerlink" title="开发进程和比赛结果"></a>开发进程和比赛结果</h2><h3 id="比赛准备"><a href="#比赛准备" class="headerlink" title="比赛准备"></a>比赛准备</h3><p>​    曾在三个不同的地方为比赛准备。斯坦福大学，在巴斯托和普利姆之间的2004年超级挑战赛的赛道以及凤凰城附近的索诺兰沙漠。在比赛前几周，团队搬到了亚利桑那州，享受美国亚利桑那州通用大众试验场的热情。下图是车辆在极端越野地形下的硬件测试，这些照片是在认为操纵车辆的时候拍摄的。</p>
+<h3 id="速度控制"><a href="#速度控制" class="headerlink" title="速度控制"></a>速度控制</h3><p>​    多个软件模块输入了Stanley的速度，最明显的是路径规划器、运行状况监视器、速度推荐器和低级速度控制器。低级速度控制器将从前三个模块的速度命令转换为实际的油门和刹车命令。执行的速度总是三个推荐速度中的最小值。路径规划器将根据基本轨迹速度限制和任何转向制动来设置车辆速度。在某些预先设定的情况下，如GPS断开或关键系统故障，车辆健康监测器将降低最大速度。</p>
+<p>​    速度推荐模块根据估算的地形坡度和粗糙度设置一个合适的最大速度。当车辆俯仰角超过5°时，地形坡度会影响最大速度。当坡度超过5°时，车辆的最大速度将线性降低，在极限情况下，车辆的速度限制到5英里/小时。地形粗糙度被反馈到一个具有迟滞的控制器，该控制器利用过滤的垂直加速度振幅和速度之间的线性关系控制速度的设定值。如第7.2节所述，如果粗糙的地形引起的振动超过了允许的最大阈值，最大速度线性降低，这样继续遇到类似的地形就会产生恰好满足冲击极限的振动。除非任何进一步的冲击，速度限制随着驾驶距离缓慢线性增加。</p>
+<p>​    这个规则可能看起来很奇怪，但它有很大的实际意义；当车辆遇到车辙，该规则降低了Stanley的速度。显然，减速发生在遇到车辙之后，而不是之前。通过缓慢恢复速度，Stanley将以更低的速度接近附近的车辙。因此，Stanley倾向于在有很多车辙的地方开得很慢，只有在一段时间没有车辙的情况下才会回到基本轨道速度。虽然这种方法不能避免孤立的车辙，但我们发现它在避免许多可能伤害车辆的冲击方面非常有效。在波浪状的地形上行驶和在车辙上行驶一样困难。在凹凸不平的地形上，减速可以通过减少共振的影响，降低磕碰的频率。</p>
+<p>​    速度推荐系统有两个特征参数：最大允许冲击和线性回归率。两者都是从人为驾驶中学来的。更具体地说，通过记录驾驶员在崎岖地形的速度曲线，Stanley确定了最接近人类驾驶速度曲线的参数。下图显示了驾驶员在2004年超级挑战赛的”达格特山脊“路段上的行驶速度曲线。它还显示了Stanley的控制器针对同一数据集的速度配置曲线。这两个配置曲线在相同的区域往往会同时变慢。然而，Stanley的曲线在两个方面是不同的：自动驾驶车辆的减速比人快得多，并且它的速度恢复是线性的，而人的速度恢复是非线性的。加速度的限制是为了保护车辆免受进一步的冲击。</p>
+<p><img src="/2020/08/30/DARPA-2005-Stanley/stanley-velocity-pro%EF%AC%81le-of-a-human-driver.png" alt="1599094371480" title="Figure 23. Velocity profile of a human driver and of Stanley&#39;s velocity controller in rugged terrain. Stanley identifies controller parameters that match human driving. This plot compares human driving with Stanley&#39;s control output."></p>
+<p>​    一旦路径规划器，速度推进器和运行状况监视器已经提交所有速度，这些速度中的最小值通过速度控制器来实现。速度控制器把刹车和油门视为两个相反的单作用力，对汽车施加纵向力。这是一个非常接近的刹车系统和简化的油门系统。控制器计算一个单一的误差度量，等于速度误差的加权和和速度误差的积分。相对权重决定了干扰抑制和超调之间的权衡。当误差度量为正时，制动系统命令制动缸压力与PI误差度量成正比；当它是负的，油门标准是设定成PI误差度量成反比。通过对两个执行器使用相同的PI误差度量，系统能够避免与相反的单作用执行器相关的颤振和死带。为了实现所要求的制动压力，滞后制动执行器通过对途锐测量的制动压力的饱和比例反馈进行控制，并通过CAN总线接口进行报告。</p>
+<h3 id="转向控制"><a href="#转向控制" class="headerlink" title="转向控制"></a>转向控制</h3><p>​    转向控制器接受由路径规划器生成的轨迹，UKF姿态和速度估计，以及测量的方向盘角度作为输入。它以20Hz的频率输出转向命令。该控制器的功能是在快速变化的地形中，闭环跟踪由路径规划器决定的行驶路径。</p>
+<p>​    关键的误差标准是轨迹误差 x(t)，如下图所示，就是测量车辆前轮中心点到轨迹的最近的点的侧向距离。现在的目的是命令转向控制收敛 x(t) 于零。Stanley 的转向控制器的核心是一个基于轨迹误差的非线性反馈函数，该函数可以证明为指数收敛。车辆在t时的速度记为 u(t)，在没有错误的情况下，使用这个公式，Stanley 的前轮会和全局轨迹的方向匹配。如下图，Psi 角度描述了最近路径段的方向和车神自身的方向的角度。在没有任何横向误差的情况下，转向控制律会让前轮平行于规划路径的方向。</p>
+<p><img src="/2020/08/30/DARPA-2005-Stanley/stanley-steering-controller.png" alt="1599142447448" title="Figure 24. Illustration of the steering controller. With zero cross-track error, the basic implementation of the steering controller steers the front wheels parallel to the path. When cross-track error is perturbed from zero, it is nulled by commanding the steering according to a nonlinear feedback function."></p>
+<p>​    基本的转向角度控制律如下：<br>$$<br>\delta(t)=\psi(t)+arctan{kx(t)\over u(t)}<br>$$<br>其中 k 为增益参数。第二项为航迹误差 x(t) 调整转向比例，这个错误越大，就会有越大的转向响应。</p>
+<p>​    使用具有无限的轮胎硬度和严格的转向限制的线性自行模型，对控制律的影响如下：<br>$$<br>x(t)=-u(t)sin\ arctan({kx(t)\over{u(t)}})={-kx(t)\over {\sqrt{1+({kx(t)\over{u(t)}})^2}}}<br>$$<br>因此对于小的轨迹误差，<br>$$<br>x(t) \approx x(0)exp-kt<br>$$<br>因此，错误指数收敛于 x(t) = 0。参数k决定了收敛速度。随着航迹错误增大，arctan 函数的作用是将前轮转向直接指向航道，产生只受限于车速的收敛。对于任何 x(t)，微分方程都会单向收敛于零。下图展示了 Stanley 在模拟器中最后控制器的相位图。航迹错误x(t)和转向角 psi(t)，包含转向输入饱和的影响。这些图说明，在两个不同速度的例子中，控制器很好地对全范围的姿态和大范围的轨迹误差进行收敛。</p>
+<p><img src="/2020/08/30/DARPA-2005-Stanley/Stanley-phase-portrait.png" alt="1599146081111" title="Figure 25. Phase portrait for k = 1 at 10 and 40 m per second, respectively, for the basic controller, including the effect of steering input saturation"></p>
+<p>​    这种基本的方法对低速行驶很有效，它的一种变体甚至可以用于反向驾驶。然而，它忽略了几个重要的影响。在控制回路中存在离散的时延，在转向柱中存在惯性，并且随着速度的增加需要消耗更多的能量。这些影响是通过在转向命令和转向角度之间的差异进行简单的衰减，该术语称为偏航阻尼。最后，为了补偿实际气压轮胎的滑移，车辆被要求具有一种稳定的偏航偏移，该偏航偏移是基于会有滑移现象的车辆模型的路径曲率和车辆速度的非线性函数，该函数在测试中进行过矫正和验证。当在实体车辆上运行时，这些要求结合起来可以稳定车辆并使轨迹误差降到零。由此产生的控制器已经在测试中被证明是稳定的，测试范围包括路面、深的越野泥坑，以及有足够紧密曲率半径导致实际滑移的轨迹。它典型地演示了与系统估计误差相当的跟踪误差。</p>
+<h2 id="开发进程和比赛结果"><a href="#开发进程和比赛结果" class="headerlink" title="开发进程和比赛结果"></a>开发进程和比赛结果</h2><h3 id="比赛准备"><a href="#比赛准备" class="headerlink" title="比赛准备"></a>比赛准备</h3><p>​    曾在三个不同的地方为比赛准备。斯坦福大学，在巴斯托和普利姆之间的2004年超级挑战赛的赛道以及凤凰城附近的索诺兰沙漠。在比赛前几周，团队搬到了亚利桑那州，享受美国亚利桑那州通用大众试验场的热情。下图是车辆在极端越野地形下的硬件测试，这些照片是在认为操纵车辆的时候拍摄的。</p>
 <p><img src="/2020/08/30/DARPA-2005-Stanley/Vehicle-testing.png" alt="1598918453307"></p>
-<p>​    在开发Stanley的过程中，斯坦福赛车队坚持严格的开发和测试计划表，期间有明确的里程碑。比赛的重点放在了早期的集成上，因此在比赛前一年就有了端到端的原型。系统定期在沙漠环境中进行测试以代表团队对超级挑战赛的期望。在比赛前的几个月里，所有的软件和硬件模块调试好，然后被冻结。这个系统的开发在比赛之前就终止了。</p>
-<p>​    系统性能的主要度量是致命性故障之间的平均距离（“MDBCF”– mean distance between catastrophic failures）。致命性故障被定义为驾驶员必须介入的一种情况。常见的故障包含软件问题，比如姿态估计错误导致地形分类失败的问题。偶尔的故障是由硬件造成的，例如，车辆的动力系统。2004年12月，MDBCF大约为1英里。在2005年7月，它增加到20英里。全国资格赛前的最后418英里没有失败；这包括一次200英里的循环测试。当时，系统开发被暂停，Stanley的横向导航精度约为30厘米。该车已经自动行驶了1200多英里。</p>
+<p>​    在开发 Stanley 的过程中，斯坦福赛车队坚持严格的开发和测试计划表，期间有明确的里程碑。比赛的重点放在了早期的集成上，因此在比赛前一年就有了端到端的原型。系统定期在沙漠环境中进行测试以代表团队对超级挑战赛的期望。在比赛前的几个月里，所有的软件和硬件模块调试好，然后被冻结。这个系统的开发在比赛之前就终止了。</p>
+<p>​    系统性能的主要度量是致命性故障之间的平均距离 “MDBCF”– mean distance between catastrophic failures。致命性故障被定义为驾驶员必须介入的一种情况。常见的故障包含软件问题，比如姿态估计错误导致地形分类失败的问题。偶尔的故障是由硬件造成的，例如，车辆的动力系统。2004年12月，MDBCF 大约为1英里。在2005年7月，它增加到20英里。全国资格赛前的最后418英里没有失败；这包括一次200英里的循环测试。当时，系统开发被暂停，Stanley 的横向导航精度约为30厘米。该车已经自动行驶了1200多英里。</p>
 <p>​    在为这次比赛做准备时，团队还测试了在最后一场比赛中没有使用的传感器。其中一款是工业级的立体视觉传感器，其基线为33厘米。在早期的实验中，我们发现立体视觉系统在近距离内提供了很好的结果，但在精度上落后于激光系统。不使用立体视觉系统的决定仅是基于这样的观察结果，即立体视觉对激光系统的加持很小。一个更大的基线可能会使立体视觉系统在更大的范围内更有用，但遗憾的是，这是不可用的。</p>
-<p>​    第二个没有在比赛中使用的传感器是24GHz的雷达系统。雷达使用线性频移键控调制（LFMSK）传输波形；它通常用于自适应巡航控制。经过对传感器增益和接受阈值的仔细调整，该雷达对沙漠地形中废弃车辆等大型正面障碍物的检测效果非常好。与第6节中的单视觉系统类似，该雷达的任务是在激光传感器之外的范围内对道路进行筛查。如果探测到潜在的障碍物，系统将Stanley的速度限制在25英里每小时，这样激光就可以及时探测到障碍物以避免碰撞。</p>
+<p>​    第二个没有在比赛中使用的传感器是 24GHz 的雷达系统。雷达使用线性频移键控调制（LFMSK）传输波形；它通常用于自适应巡航控制。经过对传感器增益和接受阈值的仔细调整，该雷达对沙漠地形中废弃车辆等大型正面障碍物的检测效果非常好。与第6节中的单视觉系统类似，该雷达的任务是在激光传感器之外的范围内对道路进行筛查。如果探测到潜在的障碍物，系统将Stanley的速度限制在25英里每小时，这样激光就可以及时探测到障碍物以避免碰撞。</p>
 <p>​    虽然雷达系统在测试中被证明非常有效，但有两个原因阻止了它在比赛中的使用。第一个原因是技术上的：在NQE期间，接收计算机的USB驱动程序反复出现问题，有时会导致接收计算机卡死。第二个原因是务实的，在NQE期间，很明显，在高速区域遇到大的正面障碍的概率很小；即使它们存在，视觉系统也很有可能探测到它们。因此，车队认为雷达系统带来的技术风险超过了它带来的好处，因此决定在比赛中不使用雷达。</p>
 <h3 id="国家资格赛"><a href="#国家资格赛" class="headerlink" title="国家资格赛"></a>国家资格赛</h3><p>​    国家资格赛（NQE-National Qualiﬁcation Event）于9月27日至10月5日在加州丰塔纳的加州高速公路上举行。像大多数竞争车辆一样，Stanley经过四轮试跑后获得了参赛资格。在43名半决赛队伍中，有11队在第一轮跑完全程，13队在第二轮跑完全程，18队在第三轮跑完全程，还有21队在第四轮跑完全程。Stanley的时间是有竞争力的，但不是最快的，第一轮10：38，第二轮9：12，第三轮11：06，第四轮11：06。但是，Stanley是唯一一辆每次都能通过50道大关，并避免与所有障碍物相撞的车辆。这完美的表现为Stanley赢得了的第二顺位，位于CMU的H1ghlander 之后，Sandstorm 之前。​    </p>
 <h3 id="比赛"><a href="#比赛" class="headerlink" title="比赛"></a>比赛</h3><p>​    2005年10月8日凌晨4点10分左右，斯坦福赛车队收到了比赛数据，包括2935个GPS参考坐标，以及最高时速50英里的速度限制。Stanley于2005年10月8日上午6时35分开始比赛。车辆立即加速，以限速或略低于限速行驶。比赛进行到3小时45分22秒时，在73.5英里处，DARPA第一次让Stanley停下来，给比Stanley早5分钟出发的CMU的H1ghlander更多的空间超车。第一次暂停持续了2分45秒。仅5分钟40秒后，Stanley又被暂停了下来，在进入比赛3小时53分钟47 秒，行驶了74.9英里处。本次暂停时间为6分35秒，总暂停时间为9分20秒。暂停的位置如下图中红圈标记的位置。从那时起，Stanley不断接近H1ghlander，距离只有几百码。尽管Stanley紧追其后于H1ghlander，但它在这场竞赛中处于领先地位。</p>
@@ -533,7 +549,8 @@
 <h2 id="致谢"><a href="#致谢" class="headerlink" title="致谢"></a>致谢</h2><p>​    斯坦福车队（SRT–Standford Racing Team）是由四个主要的支持单位赞助的：美国大众的电子研究实验室，Mohr Davidow合资企业，Android和红牛。主要支持单位与斯坦福大学的团队领导组成了SRT指导委员会，负责监督SRT的运作。SRT还得到了英特尔研究公司、霍尼韦尔公司、Tyzx公司和Coverity公司的支持。并且David Cheriton提供了慷慨的财政资助。斯坦福大学，大众汽车和相关机构的很多人帮助我们开发了Stanley，非常感谢。SRT也感谢DARPA组织这个伟大的比赛和许多记者提供了新闻报道。最后，我们要感谢为这次活动做准备和参与的许多朋友，以及一路上帮助我们和其他团队的许多人。</p>
 <h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av200073789/">DARPA Grand Challenge 美国无人驾驶挑战赛 全程记录</a></p>
 <p><a target="_blank" rel="noopener" href="http://isl.ecst.csuchico.edu/DOCS/darpa2005/DARPA%202005%20Stanley.pdf">Stanley: The robot that won the DARPA Grand Challenge</a></p>
-<p>主要作者Sebastian Thrun，人工智能及自动驾驶领域真正的牛人，2005年带队参加DARPA挑战赛就一举获得冠军，之后曾入职Google和自动驾驶部门，还创建了Udacity。</p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/a47a9e7587f1">Sebastian Thrun</a></p>
+<p><a target="_blank" rel="noopener" href="http://open.163.com/newview/movie/free?pid=MBBL91A3O&mid=MBBL9CG33">无人驾驶汽车是如何看清路况的</a></p>
 
     </div>
 
@@ -677,6 +694,54 @@ document.addEventListener('pjax:success', () => {
 
     <div class="pjax">
   
+
+  
+      <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      const script = document.createElement('script');
+      script.src = '//unpkg.com/mathjax@3.1.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
