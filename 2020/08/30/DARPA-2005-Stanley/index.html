@@ -58,7 +58,7 @@
 <meta property="og:image" content="http://riveryoung.cn/2020/08/30/DARPA-2005-Stanley/processes-the-drivability-map.png">
 <meta property="og:image" content="http://riveryoung.cn/2020/08/30/DARPA-2005-Stanley/stanley-velocity-pro%EF%AC%81le-of-a-human-driver.png">
 <meta property="og:image" content="http://riveryoung.cn/2020/08/30/DARPA-2005-Stanley/stanley-steering-controller.png">
-<meta property="og:image" content="http://riveryoung.cn/2020/08/30/DARPA-2005-Stanley/Stanley-phase-portrait.png">
+<meta property="og:image" content="http://riveryoung.cn/2020/08/30/DARPA-2005-Stanley/stanley-phase-portrait.png">
 <meta property="og:image" content="http://riveryoung.cn/2020/08/30/DARPA-2005-Stanley/Vehicle-testing.png">
 <meta property="og:image" content="http://riveryoung.cn/2020/08/30/DARPA-2005-Stanley/Stanley-path.png">
 <meta property="og:image" content="http://riveryoung.cn/2020/08/30/DARPA-2005-Stanley/Passing-CMU-H1ghlander-robot.png">
@@ -70,7 +70,7 @@
 <meta property="og:image" content="http://riveryoung.cn/2020/08/30/DARPA-2005-Stanley/Beer-Bottle-Pass2.png">
 <meta property="og:image" content="http://riveryoung.cn/2020/08/30/DARPA-2005-Stanley/histogram-of-lateral-offsets.png">
 <meta property="article:published_time" content="2020-08-30T08:35:31.000Z">
-<meta property="article:modified_time" content="2020-09-06T16:50:49.437Z">
+<meta property="article:modified_time" content="2020-09-06T17:10:08.709Z">
 <meta property="article:author" content="River Young">
 <meta property="article:tag" content="自动驾驶">
 <meta name="twitter:card" content="summary">
@@ -334,7 +334,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-07 00:50:49" itemprop="dateModified" datetime="2020-09-07T00:50:49+08:00">2020-09-07</time>
+        <time title="修改时间：2020-09-07 01:10:08" itemprop="dateModified" datetime="2020-09-07T01:10:08+08:00">2020-09-07</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -514,7 +514,7 @@
 <p><img src="/2020/08/30/DARPA-2005-Stanley/stanley-steering-controller.png" alt="1599142447448" title="Figure 24. Illustration of the steering controller. With zero cross-track error, the basic implementation of the steering controller steers the front wheels parallel to the path. When cross-track error is perturbed from zero, it is nulled by commanding the steering according to a nonlinear feedback function."></p>
 <p>​    基本的转向角度控制律如下：<br>$$<br>\delta(t)=\psi(t)+arctan{kx(t)\over u(t)}<br>$$<br>其中 k 为增益参数。第二项为航迹误差 x(t) 调整转向比例，这个错误越大，就会有越大的转向响应。</p>
 <p>​    使用具有无限的轮胎硬度和严格的转向限制的线性自行模型，对控制律的影响如下：<br>$$<br>x(t)=-u(t)sin\ arctan({kx(t)\over{u(t)}})={-kx(t)\over {\sqrt{1+({kx(t)\over{u(t)}})^2}}}<br>$$<br>因此对于小的轨迹误差，<br>$$<br>x(t) \approx x(0)exp-kt<br>$$<br>因此，错误指数收敛于 x(t) = 0。参数 k 决定了收敛速度。随着航迹错误增大，arctan 函数的作用是将前轮转向直接指向航道，产生只受限于车速的收敛。对于任何 x(t)，微分方程都会单向收敛于零。下图展示了 Stanley 在模拟器中最后控制器的相位图。航迹错误 x(t) 和转向角 psi(t)，包含转向输入饱和的影响。这些图说明，在两个不同速度的例子中，控制器很好地对全范围的姿态和大范围的轨迹误差进行收敛。</p>
-<p><img src="/2020/08/30/DARPA-2005-Stanley/Stanley-phase-portrait.png" alt="1599146081111" title="Figure 25. Phase portrait for k = 1 at 10 and 40 m per second, respectively, for the basic controller, including the effect of steering input saturation"></p>
+<p><img src="/2020/08/30/DARPA-2005-Stanley/stanley-phase-portrait.png" alt="1599146081111" title="Figure 25. Phase portrait for k = 1 at 10 and 40 m per second, respectively, for the basic controller, including the effect of steering input saturation"></p>
 <p>​    这种基本的方法对低速行驶很有效，它的一种变体甚至可以用于反向驾驶。然而，它忽略了几个重要的影响。在控制回路中存在离散的时延，在转向柱中存在惯性，并且随着速度的增加需要消耗更多的能量。这些影响是通过在转向命令和转向角度之间的差异进行简单的衰减，该术语称为偏航阻尼。最后，为了补偿实际气压轮胎的滑移，车辆被要求具有一种稳定的偏航偏移，该偏航偏移是基于会有滑移现象的车辆模型的路径曲率和车辆速度的非线性函数，该函数在测试中进行过矫正和验证。当在实体车辆上运行时，这些要求结合起来可以稳定车辆并使轨迹误差降到零。由此产生的控制器已经在测试中被证明是稳定的，测试范围包括路面、深的越野泥坑，以及有足够紧密曲率半径导致实际滑移的轨迹。它典型地演示了与系统估计误差相当的跟踪误差。</p>
 <h2 id="开发进程和比赛结果"><a href="#开发进程和比赛结果" class="headerlink" title="开发进程和比赛结果"></a>开发进程和比赛结果</h2><h3 id="比赛准备"><a href="#比赛准备" class="headerlink" title="比赛准备"></a>比赛准备</h3><p>​    曾在三个不同的地方为比赛准备。斯坦福大学，在巴斯托和普利姆之间的 2004 年超级挑战赛的赛道以及凤凰城附近的索诺兰沙漠。在比赛前几周，团队搬到了亚利桑那州，享受美国亚利桑那州通用大众试验场的热情。下图是车辆在极端越野地形下的硬件测试，这些照片是在认为操纵车辆的时候拍摄的。</p>
 <p><img src="/2020/08/30/DARPA-2005-Stanley/Vehicle-testing.png" alt="1598918453307" title="Figure 26. Vehicle testing at the Volkswagen Arizona Proving Grounds, manual driving."></p>
