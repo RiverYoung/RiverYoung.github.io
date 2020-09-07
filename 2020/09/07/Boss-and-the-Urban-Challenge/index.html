@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//unpkg.com/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//unpkg.com/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"riveryoung.cn","root":"/","scheme":"Mist","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+
+  <meta name="description" content="​    Boss 是一辆可以在城市环境中自动驾驶的汽车，它使用车载传感器（全球定位系统、激光、雷达和摄像机）跟踪其他车辆，探测静态障碍物，并根据道路模型定位自身。它使用一个结合了任务、行为和运动规划的三层的规划系统。任务规划层考虑走哪条街道来实现任务目标。行为层决定何时在十字路口切换到优先级更高的车道和执行错误校正操作。运动规划层在向局部目标前进时选择动作以避开障碍物。该系统是使用一个螺旋系统开">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Boss and the Urban Challenge">
+<meta property="og:url" content="http://riveryoung.cn/2020/09/07/Boss-and-the-Urban-Challenge/index.html">
+<meta property="og:site_name" content="River Young">
+<meta property="og:description" content="​    Boss 是一辆可以在城市环境中自动驾驶的汽车，它使用车载传感器（全球定位系统、激光、雷达和摄像机）跟踪其他车辆，探测静态障碍物，并根据道路模型定位自身。它使用一个结合了任务、行为和运动规划的三层的规划系统。任务规划层考虑走哪条街道来实现任务目标。行为层决定何时在十字路口切换到优先级更高的车道和执行错误校正操作。运动规划层在向局部目标前进时选择动作以避开障碍物。该系统是使用一个螺旋系统开">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://riveryoung.cn/2020/09/07/Boss-and-the-Urban-Challenge/1_Boss.png">
+<meta property="article:published_time" content="2020-09-07T13:50:06.000Z">
+<meta property="article:modified_time" content="2020-09-07T16:41:32.327Z">
+<meta property="article:author" content="River Young">
+<meta property="article:tag" content="自动驾驶">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://riveryoung.cn/2020/09/07/Boss-and-the-Urban-Challenge/1_Boss.png">
+
+
+<link rel="canonical" href="http://riveryoung.cn/2020/09/07/Boss-and-the-Urban-Challenge/">
+
+
+<script data-pjax class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Boss and the Urban Challenge | River Young</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">River Young</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">爱技术/爱拍照</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BOSS"><span class="nav-number">2.</span> <span class="nav-text">BOSS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E5%8A%A8%E8%A7%84%E5%88%92"><span class="nav-number">3.</span> <span class="nav-text">运动规划</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%A8%E8%BF%B9%E7%94%9F%E6%88%90"><span class="nav-number">3.1.</span> <span class="nav-text">轨迹生成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%8C%E8%BD%A6%E5%AF%BC%E8%88%AA"><span class="nav-number">3.2.</span> <span class="nav-text">行车导航</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BA%E5%9F%9F%E5%AF%BC%E8%88%AA"><span class="nav-number">3.3.</span> <span class="nav-text">区域导航</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%84%9F%E7%9F%A5"><span class="nav-number">4.</span> <span class="nav-text">感知</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E9%9A%9C%E7%A2%8D%E7%89%A9%E6%A3%80%E6%B5%8B%E4%B8%8E%E8%BF%BD%E8%B8%AA"><span class="nav-number">4.1.</span> <span class="nav-text">移动障碍物检测与追踪</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E9%9A%9C%E7%A2%8D%E7%89%A9%E6%A3%80%E6%B5%8B%E4%B8%8E%E6%B5%8B%E7%BB%98"><span class="nav-number">4.2.</span> <span class="nav-text">静态障碍物检测与测绘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%BA%BF%E5%9B%BE%E5%AE%9A%E4%BD%8D"><span class="nav-number">4.3.</span> <span class="nav-text">路线图定位</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%BD%8D%E8%BE%93%E5%85%A5"><span class="nav-number">4.3.1.</span> <span class="nav-text">定位输入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%8D%E7%BD%AE%E8%BF%87%E6%BB%A4"><span class="nav-number">4.3.2.</span> <span class="nav-text">位置过滤</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E5%86%B5%E8%AF%84%E4%BC%B0"><span class="nav-number">4.4.</span> <span class="nav-text">路况评估</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%A0%E6%84%9F%E5%99%A8%E8%BE%93%E5%85%A5"><span class="nav-number">4.4.1.</span> <span class="nav-text">传感器输入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E5%90%91%E9%87%8F"><span class="nav-number">4.4.2.</span> <span class="nav-text">状态向量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B2%92%E5%AD%90%E6%BB%A4%E6%B3%A2"><span class="nav-number">4.4.3.</span> <span class="nav-text">粒子滤波</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%A0%E6%84%9F%E5%99%A8%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86"><span class="nav-number">4.4.4.</span> <span class="nav-text">传感器数据处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%8D%B7%E7%A7%AF%E4%B8%8E%E8%B7%9D%E7%A6%BB%E8%BD%AC%E6%8D%A2"><span class="nav-number">4.4.5.</span> <span class="nav-text">快速卷积与距离转换</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E8%A7%84%E5%88%92"><span class="nav-number">5.</span> <span class="nav-text">任务规划</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E6%B5%8B%E9%98%BB%E5%A1%9E"><span class="nav-number">5.1.</span> <span class="nav-text">检测阻塞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A0%B5%E5%A1%9E"><span class="nav-number">5.2.</span> <span class="nav-text">堵塞</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%8C%E4%B8%BA%E6%8E%A8%E7%90%86"><span class="nav-number">6.</span> <span class="nav-text">行为推理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%81%E5%AD%97%E5%8F%A3%E8%B7%AF%E4%B8%8E%E9%81%BF%E8%AE%A9"><span class="nav-number">6.1.</span> <span class="nav-text">十字口路与避让</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%81%E5%AD%97%E8%B7%AF%E5%8F%A3%E4%B8%AD%E5%BF%83%E4%BC%98%E5%85%88%E8%AF%84%E4%BC%B0"><span class="nav-number">6.1.1.</span> <span class="nav-text">十字路口中心优先评估</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%81%BF%E8%AE%A9"><span class="nav-number">6.1.2.</span> <span class="nav-text">避让</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%83%B5%E5%B1%80%E7%AE%A1%E7%90%86"><span class="nav-number">6.1.3.</span> <span class="nav-text">僵局管理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%A6%E8%B7%9D%E4%BF%9D%E6%8C%81%E4%B8%8E%E5%B9%B6%E8%BD%A6%E8%AE%A1%E5%88%92"><span class="nav-number">6.2.</span> <span class="nav-text">车距保持与并车计划</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E6%A0%A1%E6%AD%A3"><span class="nav-number">6.3.</span> <span class="nav-text">错误校正</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%8C%E8%BD%A6%E6%95%85%E9%9A%9C"><span class="nav-number">6.3.1.</span> <span class="nav-text">行车故障</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%81%E5%AD%97%E8%B7%AF%E5%8F%A3%E5%A4%B1%E8%B4%A5"><span class="nav-number">6.3.2.</span> <span class="nav-text">十字路口失败</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8C%BA%E9%97%B4%E5%A4%B1%E8%B4%A5"><span class="nav-number">6.3.3.</span> <span class="nav-text">区间失败</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84"><span class="nav-number">7.</span> <span class="nav-text">软件架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">8.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E5%9B%BD%E5%AE%B6%E8%B5%84%E6%A0%BC%E8%B5%9B%E5%92%8C%E5%9F%8E%E5%B8%82%E6%8C%91%E6%88%98%E8%B5%9B%E5%86%B3%E8%B5%9B%E7%9A%84%E8%A1%A8%E7%8E%B0"><span class="nav-number">9.</span> <span class="nav-text">在国家资格赛和城市挑战赛决赛的表现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BD%E5%AE%B6%E8%B5%84%E6%A0%BC%E8%B5%9B%E5%88%86%E6%9E%90"><span class="nav-number">9.1.</span> <span class="nav-text">国家资格赛分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%B3%E8%B5%9B%E5%88%86%E6%9E%90"><span class="nav-number">9.2.</span> <span class="nav-text">决赛分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93"><span class="nav-number">10.</span> <span class="nav-text">经验总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">11.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%B4%E8%B0%A2"><span class="nav-number">12.</span> <span class="nav-text">致谢</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E9%93%BE%E6%8E%A5"><span class="nav-number">13.</span> <span class="nav-text">相关链接</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">River Young</p>
+  <div class="site-description" itemprop="description">科技呵护未来</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RiverYoung" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RiverYoung" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/a-he-hen-mang-92" title="zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;a-he-hen-mang-92" rel="noopener" target="_blank"><i class="fab fa-zhihu fa-fw"></i>zhihu</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yangjianghe@hikvision.com" title="E-Mail → mailto:yangjianghe@hikvision.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/%E6%B1%9F%E6%B2%B3-%E6%9D%A8-1b862916b/" title="in → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;%E6%B1%9F%E6%B2%B3-%E6%9D%A8-1b862916b&#x2F;" rel="noopener" target="_blank"><i class="fa fa-invision fa-fw"></i>in</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://riveryoung.cn/2020/09/07/Boss-and-the-Urban-Challenge/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="River Young">
+      <meta itemprop="description" content="科技呵护未来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="River Young">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Boss and the Urban Challenge
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-07 21:50:06" itemprop="dateCreated datePublished" datetime="2020-09-07T21:50:06+08:00">2020-09-07</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-08 00:41:32" itemprop="dateModified" datetime="2020-09-08T00:41:32+08:00">2020-09-08</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%87%AA%E5%8A%A8%E9%A9%BE%E9%A9%B6/" itemprop="url" rel="index"><span itemprop="name">自动驾驶</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2020/09/07/Boss-and-the-Urban-Challenge/" class="post-meta-item leancloud_visitors" data-flag-title="Boss and the Urban Challenge" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>​    Boss 是一辆可以在城市环境中自动驾驶的汽车，它使用车载传感器（全球定位系统、激光、雷达和摄像机）跟踪其他车辆，探测静态障碍物，并根据道路模型定位自身。它使用一个结合了任务、行为和运动规划的三层的规划系统。任务规划层考虑走哪条街道来实现任务目标。行为层决定何时在十字路口切换到优先级更高的车道和执行错误校正操作。运动规划层在向局部目标前进时选择动作以避开障碍物。该系统是使用一个螺旋系统开发流程，并着重于定期的、回归的系统测试，以满足 DARPA 城市挑战赛的需求。在全国资格赛和 85 公里城市挑战赛决赛中，Boss 证明了它的能力，获得了资格赛第一名并且赢得了挑战赛决赛的冠军。<a id="more"></a></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>​    2003 年，美国国防高级研究计划局（DARPA）宣布了第一届超级挑战赛。其目标在于开发能够在沙漠中高速行驶的自动驾驶车辆。美国国会要求到 2015 年，三分之一的美军地面车辆必须实现无人驾驶，该比赛就应运而生。尽管已经有了一系列的地面车辆研究计划，但有一个共识是现有的研究计划将无法提供必要的技术来满足这一目标（陆军无人地面车辆技术委员会，2002 年）。因此 DARPA 决定集合整个领域来满足这一需求。</p>
+<p>​    第一届超级挑战赛于 2004 年 3 月举行。虽然没有一辆车能够完成这项挑战，但一辆名为 Sandstorm 的车走得最远，为自动驾驶能力设定了新的基准，并为如何赢得这项挑战提供了模板（Urmson et al.,2004）。第二年，有五辆车完成了相同的挑战，Stanley （Thrun et al.,2006）在 Sandstorm  和 H1ghlander （Urmson et al.,2006）之前几分钟完成了 244 公里的比赛（不到 7 小时）。</p>
+<p>​    在第二届超级挑战赛成功后，DARPA 组织了第三届比赛：城市挑战赛。这次的挑战赛宣布于 2006 年 4 月，要求自动驾驶汽车在城市环境中行驶 97 公里，与其他行驶中的车辆相互作用，并遵守加州交通规则。这项赛事引起了广泛的关注，吸引了来自世界各地的 89 支队伍注册参赛。这些团队由工业界和学术界组成，都对推进自动驾驶汽车的能力充满激情。</p>
+<p>​    为了参加这项挑战赛，参赛队伍必须通过一系列测试。第一项是提供一份可信的技术文档，描述他们将如何实现安全、有自动驾驶能力的汽车。基于这些论文，53 个团队有机会直接为 DARPA 演示他们在简单的城市驾驶场景中自动驾驶的能力，包括通过停止的汽车和在十字路口与其进行适当的互动。经过这些比赛后，队伍进一步缩小到 36 队，他们被邀请参加在维克多维尔，加利福尼亚州的国家资格赛（NQE）。在这些队伍中，只有 11 支队伍有资格参加城市挑战赛决赛（UCFE）。</p>
+<p>​    本文描述了构成 Boss（参见图 1）的算法和机制。Boss 是一辆能够以 48 公里/小时的速度安全行驶的自动驾驶车辆。“Boss” 是以 Charles “Boss” Kettering 的名字命名的。Kettering 是汽车工业的一位杰出人物，他的发明范围很广，包括汽车全电动起动器、氟利昂冷却剂和早产儿保温箱。Boss 是由 Tartan 赛车团队开发的，该团队由来自卡耐基梅隆大学（CMU）、通用汽车、卡特彼勒、大陆和英特尔等多处的学生、员工和研究人员组成。本文首先描述自动驾驶车辆和传感器，然后讨论使其能够自动驾驶的算法和方法。</p>
+<p><img src="/2020/09/07/Boss-and-the-Urban-Challenge/1_Boss.png" alt="1599495663632" title="Figure 1. Boss, the autonomous Chevy Tahoe that won the 2007 DARPA Urban Challenge."></p>
+<p>​    运动规划子系统（如第 3 节所述）由两个规划器组成，每个规划器都能在达到预期目标的同时避开静态和动态障碍。考虑了两大场景：结构化驾驶（道路跟随）和非结构化驾驶（停车场操作）。对于结构化驾驶，一个局部规划器生成轨迹以保持在其车道上的同时避开障碍物。对于非结构化驾驶，例如进出停车场，使用一个具有四维搜索空间（位置、方向、行驶方向）的规划器。无论哪一个规划器当前处于激活状态，其结果是一个轨迹，当车辆控制器按该轨迹执行时，将安全驶向目标。</p>
+<p>​    </p>
+<h2 id="BOSS"><a href="#BOSS" class="headerlink" title="BOSS"></a>BOSS</h2><h2 id="运动规划"><a href="#运动规划" class="headerlink" title="运动规划"></a>运动规划</h2><h3 id="轨迹生成"><a href="#轨迹生成" class="headerlink" title="轨迹生成"></a>轨迹生成</h3><h3 id="行车导航"><a href="#行车导航" class="headerlink" title="行车导航"></a>行车导航</h3><h3 id="区域导航"><a href="#区域导航" class="headerlink" title="区域导航"></a>区域导航</h3><h2 id="感知"><a href="#感知" class="headerlink" title="感知"></a>感知</h2><h3 id="移动障碍物检测与追踪"><a href="#移动障碍物检测与追踪" class="headerlink" title="移动障碍物检测与追踪"></a>移动障碍物检测与追踪</h3><h3 id="静态障碍物检测与测绘"><a href="#静态障碍物检测与测绘" class="headerlink" title="静态障碍物检测与测绘"></a>静态障碍物检测与测绘</h3><h3 id="路线图定位"><a href="#路线图定位" class="headerlink" title="路线图定位"></a>路线图定位</h3><h4 id="定位输入"><a href="#定位输入" class="headerlink" title="定位输入"></a>定位输入</h4><h4 id="位置过滤"><a href="#位置过滤" class="headerlink" title="位置过滤"></a>位置过滤</h4><h3 id="路况评估"><a href="#路况评估" class="headerlink" title="路况评估"></a>路况评估</h3><h4 id="传感器输入"><a href="#传感器输入" class="headerlink" title="传感器输入"></a>传感器输入</h4><h4 id="状态向量"><a href="#状态向量" class="headerlink" title="状态向量"></a>状态向量</h4><h4 id="粒子滤波"><a href="#粒子滤波" class="headerlink" title="粒子滤波"></a>粒子滤波</h4><h4 id="传感器数据处理"><a href="#传感器数据处理" class="headerlink" title="传感器数据处理"></a>传感器数据处理</h4><h4 id="快速卷积与距离转换"><a href="#快速卷积与距离转换" class="headerlink" title="快速卷积与距离转换"></a>快速卷积与距离转换</h4><h2 id="任务规划"><a href="#任务规划" class="headerlink" title="任务规划"></a>任务规划</h2><h3 id="检测阻塞"><a href="#检测阻塞" class="headerlink" title="检测阻塞"></a>检测阻塞</h3><h3 id="堵塞"><a href="#堵塞" class="headerlink" title="堵塞"></a>堵塞</h3><h2 id="行为推理"><a href="#行为推理" class="headerlink" title="行为推理"></a>行为推理</h2><h3 id="十字口路与避让"><a href="#十字口路与避让" class="headerlink" title="十字口路与避让"></a>十字口路与避让</h3><h4 id="十字路口中心优先评估"><a href="#十字路口中心优先评估" class="headerlink" title="十字路口中心优先评估"></a>十字路口中心优先评估</h4><h4 id="避让"><a href="#避让" class="headerlink" title="避让"></a>避让</h4><h4 id="僵局管理"><a href="#僵局管理" class="headerlink" title="僵局管理"></a>僵局管理</h4><h3 id="车距保持与并车计划"><a href="#车距保持与并车计划" class="headerlink" title="车距保持与并车计划"></a>车距保持与并车计划</h3><h3 id="错误校正"><a href="#错误校正" class="headerlink" title="错误校正"></a>错误校正</h3><h4 id="行车故障"><a href="#行车故障" class="headerlink" title="行车故障"></a>行车故障</h4><h4 id="十字路口失败"><a href="#十字路口失败" class="headerlink" title="十字路口失败"></a>十字路口失败</h4><h4 id="区间失败"><a href="#区间失败" class="headerlink" title="区间失败"></a>区间失败</h4><h2 id="软件架构"><a href="#软件架构" class="headerlink" title="软件架构"></a>软件架构</h2><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><h2 id="在国家资格赛和城市挑战赛决赛的表现"><a href="#在国家资格赛和城市挑战赛决赛的表现" class="headerlink" title="在国家资格赛和城市挑战赛决赛的表现"></a>在国家资格赛和城市挑战赛决赛的表现</h2><h3 id="国家资格赛分析"><a href="#国家资格赛分析" class="headerlink" title="国家资格赛分析"></a>国家资格赛分析</h3><h3 id="决赛分析"><a href="#决赛分析" class="headerlink" title="决赛分析"></a>决赛分析</h3><h2 id="经验总结"><a href="#经验总结" class="headerlink" title="经验总结"></a>经验总结</h2><h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><h2 id="致谢"><a href="#致谢" class="headerlink" title="致谢"></a>致谢</h2><h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><p><a target="_blank" rel="noopener" href="https://v.youku.com/v_show/id_XNDQ5NjA0NTMy.html?spm=a2h1n.8251843.playList.5!2~5~A&f=19488094&o=1">Video of 2007 Urban Challenge</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%87%AA%E5%8A%A8%E9%A9%BE%E9%A9%B6/" rel="tag"># 自动驾驶</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/08/30/DARPA-2005-Stanley/" rel="prev" title="在DARPA超级挑战赛获胜的Stanley">
+                  <i class="fa fa-chevron-left"></i> 在DARPA超级挑战赛获胜的Stanley
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">River Young</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//unpkg.com/animejs@3.2.0/lib/anime.min.js"></script>
+  <script src="/true"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+    <div class="pjax">
+  
+
+  
+
+  
+
+    </div>
+</body>
+</html>
